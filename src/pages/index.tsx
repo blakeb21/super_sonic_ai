@@ -20,7 +20,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="mx-auto text-purple-600 text-2xl">Welcome to SuperSonicAI</h1>
+        <h1 className="mx-auto text-purple-800 text-2xl">Welcome to SuperSonicAI</h1>
+
       </main>
     </>
   );
