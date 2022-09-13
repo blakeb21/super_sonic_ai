@@ -20,7 +20,9 @@ const Home: NextPage = () => {
         </Link>
         <div className="gap-2 flex flex-row">
           <button className=" rounded bg-slate-700 p-2">Our Story</button>
-          <button className=" rounded bg-slate-700 p-2">View the Source Code</button>
+          <a target="_blank" href="https://git.cs.vt.edu/dmath010/supersonicai" rel="noopener noreferrer">
+            <button className=" rounded bg-slate-700 p-2">View the Source Code</button>
+          </a>
         </div>
       </header>
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
