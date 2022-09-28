@@ -16,9 +16,18 @@ const Home: NextPage = () => {
       <main className="min-h-screen">
         <Header />
         <article>
-          <div className="container mx-auto flex flex-col items-center justify-center  p-4">
-            <h1 className="text-purple-500 text-2xl">Welcome to SuperSonicAI</h1>
-            <p className="">Content coming soon!</p>
+          <div className="container mx-auto flex flex-col text-center p-6 md:px-8 lg:px-16">
+            <h1 className="text-yellow-400 text-2xl m-2">Welcome to SuperSonicAI</h1>
+            <p className="">SuperSonicAI is our semester long Capstone Project. Our goal was to expand on an AI competition to expand our knowledge and skills in the realm of Computer Science. </p>
+          </div>
+        </article>
+        <article>
+          <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
+            <h3 className="text-yellow-400 text-center">Phase 1: NEAT Implementation</h3>
+            <p className="text-center">The first step in our project was to create a basic NEAT implementation. NEAT stands for NeuroEvolution of Augmenting Topologies, which is a form of evolutionary machine learning developed by researchers at MIT. The result is a fast but structured machine learning algorithm.</p>
+            <Link href={'/neat'}>
+              <button className="rounded bg-yellow-400 text-black mx-auto p-2">Learn More!</button>
+            </Link>
           </div>
         </article>
       </main>
