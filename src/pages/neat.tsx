@@ -173,8 +173,13 @@ with open('winner.pkl', 'wb') as output:
         </article>
         <article>
             <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
-                <h3 className="text-center text-yellow-400">Our Code:</h3>
-                <Prism withLineNumbers language="python">
+                <h2 className="text-center text-yellow-400">Our Code:</h2>
+                <Prism 
+                  withLineNumbers 
+                  colorScheme="dark"
+                  copyLabel="Copy code to clipboard"
+                  copiedLabel="Code copied to clipboard" 
+                  language="python">
                  {neatCode}
                 </Prism>
             </div>

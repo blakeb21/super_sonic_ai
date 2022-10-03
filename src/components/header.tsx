@@ -10,7 +10,7 @@ const Header: NextComponentType = () => {
         <article>
             <header className="header bg-gray-900 flex w-full p-8 flex-col items-center gap-2 md:justify-between md:flex-row ">
                 <div className="flex flex-row">
-                    <Image alt="Sonic with a thumbs up" src={sonic} width={32} height={40}/>
+                    <Image alt="Sonic with a thumbs up" src={sonic} width={32} height={43}/>
                     <Link href={"/"}>
                         <h1 className="text-4xl font-bold cursor-pointer text-purple-500">SuperSonicAI</h1>
                     </Link>
