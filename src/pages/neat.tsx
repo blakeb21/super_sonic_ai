@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Header from "../components/header";
-import { Prism } from '@mantine/prism';
+// import { Prism } from '@mantine/prism';
+import { CodeBlock, CopyBlock, dracula} from 'react-code-blocks';
 
 
 const Home: NextPage = () => {
@@ -172,14 +173,12 @@ with open('winner.pkl', 'wb') as output:
         </article>
         <article>
           <h2 className="text-center text-yellow-400 p-6 md:px-8 lg:px-16">Our Code:</h2>
-          <Prism className="m-6 md:mx-8 lg:mx-16"
-            withLineNumbers 
-            colorScheme="dark"
-            copyLabel="Copy code to clipboard"
-            copiedLabel="Code copied to clipboard" 
-            language="python">
-           {neatCode}
-          </Prism>
+          <div className="m-6 md:mx-8 lg:mx-16">
+          <CopyBlock 
+            theme={dracula}
+            language="python"
+            text={neatCode} />
+          </div>
         </article>
       </main>
     </>
