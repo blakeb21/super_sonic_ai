@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         </article>
         <article>
           <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
-            <h3 className="text-yellow-400 text-center">Phase 1: NEAT Implementation</h3>
+            <h2 className="text-yellow-400 text-center">Phase 1: NEAT Implementation</h2>
             <p className="text-center">The first step in our project was to create a basic NEAT implementation. NEAT stands for NeuroEvolution of Augmenting Topologies, which is a form of evolutionary machine learning developed by researchers at MIT. The result is a fast but structured machine learning algorithm.</p>
             <Link href={'/neat'}>
               <button className="rounded bg-yellow-400 text-black mx-auto p-2">Learn More!</button>

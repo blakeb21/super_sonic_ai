@@ -1,5 +1,5 @@
 import { NextComponentType } from "next";
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 
 import sonic from "../../public/sonic.png"
@@ -10,7 +10,7 @@ const Header: NextComponentType = () => {
         <article>
             <header className="header bg-gray-900 flex w-full p-8 flex-col items-center gap-2 md:justify-between md:flex-row ">
                 <div className="flex flex-row">
-                    <Image alt="Sonic with a thumbs up" src={sonic} width={32} height={43}/>
+                    <Image alt="Sonic with a thumbs up" src={sonic} width={32} height={43} layout="fixed"/>
                     <Link href={"/"}>
                         <h1 className="text-4xl font-bold cursor-pointer text-purple-500">SuperSonicAI</h1>
                     </Link>
