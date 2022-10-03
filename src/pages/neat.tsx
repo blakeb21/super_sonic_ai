@@ -168,20 +168,18 @@ with open('winner.pkl', 'wb') as output:
           <div className="container mx-auto flex flex-col text-center p-6 md:px-8 lg:px-16">
             <h1 className="text-yellow-400 text-2xl m-2">NEAT Implemenation</h1>
             <p className="text-center">The first step in our project was to create a basic NEAT implementation. NEAT stands for NeuroEvolution of Augmenting Topologies, which is a form of evolutionary machine learning developed by researchers at MIT. The result is a fast but structured machine learning algorithm.</p>
-            </div>
+          </div>
         </article>
         <article>
-            <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
-                <h2 className="text-center text-yellow-400">Our Code:</h2>
-                <Prism 
-                  withLineNumbers 
-                  colorScheme="dark"
-                  copyLabel="Copy code to clipboard"
-                  copiedLabel="Code copied to clipboard" 
-                  language="python">
-                 {neatCode}
-                </Prism>
-            </div>
+          <h2 className="text-center text-yellow-400 p-6 md:px-8 lg:px-16">Our Code:</h2>
+          <Prism className="m-6 md:mx-8 lg:mx-16"
+            withLineNumbers 
+            colorScheme="dark"
+            copyLabel="Copy code to clipboard"
+            copiedLabel="Code copied to clipboard" 
+            language="python">
+           {neatCode}
+          </Prism>
         </article>
       </main>
     </>
