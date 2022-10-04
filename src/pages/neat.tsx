@@ -1,16 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Header from "../components/header";
-// import { Prism } from '@mantine/prism';
-// import { CopyBlock, dracula} from 'react-code-blocks';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
-import darcula from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 
 const Home: NextPage = () => {
 
-    const neatCode = `
-import retro
+    const neatCode = `import retro
 import numpy as np
 import cv2
 import neat
@@ -177,7 +174,8 @@ with open('winner.pkl', 'wb') as output:
           <h2 className="text-center text-yellow-400 p-6 md:px-8 lg:px-16">Our Code:</h2>
           <div className="m-6 md:mx-8 lg:mx-16">
           <SyntaxHighlighter 
-            theme={darcula}
+            showLineNumbers
+            style={vscDarkPlus}
             language="python">
             {neatCode} 
             </SyntaxHighlighter>
