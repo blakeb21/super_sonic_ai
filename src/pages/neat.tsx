@@ -2,13 +2,15 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Header from "../components/header";
 // import { Prism } from '@mantine/prism';
-import { CodeBlock, CopyBlock, dracula} from 'react-code-blocks';
+// import { CopyBlock, dracula} from 'react-code-blocks';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import darcula from '/node_modules/react-syntax-highlighter/dist/cjs/styles/prism';
 
 
 const Home: NextPage = () => {
 
-    const neatCode = 
-    `import retro
+    const neatCode = `
+import retro
 import numpy as np
 import cv2
 import neat
@@ -174,10 +176,11 @@ with open('winner.pkl', 'wb') as output:
         <article>
           <h2 className="text-center text-yellow-400 p-6 md:px-8 lg:px-16">Our Code:</h2>
           <div className="m-6 md:mx-8 lg:mx-16">
-          <CopyBlock 
-            theme={dracula}
-            language="python"
-            text={neatCode} />
+          <SyntaxHighlighter 
+            theme={darcula}
+            language="python">
+            {neatCode} 
+            </SyntaxHighlighter>
           </div>
         </article>
       </main>
