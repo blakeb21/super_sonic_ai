@@ -16,6 +16,7 @@
     "@trpc/next": "^9.27.2",
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
+    "@types/react-syntax-highlighter": "^15.5.5",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-code-blocks": "^0.0.9-0",

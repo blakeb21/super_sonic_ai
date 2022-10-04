@@ -4,7 +4,7 @@ import Header from "../components/header";
 // import { Prism } from '@mantine/prism';
 // import { CopyBlock, dracula} from 'react-code-blocks';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
-import darcula from '/node_modules/react-syntax-highlighter/dist/cjs/styles/prism';
+import darcula from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 
 const Home: NextPage = () => {
