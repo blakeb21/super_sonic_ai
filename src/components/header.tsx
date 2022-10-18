@@ -18,7 +18,7 @@ const Header: NextComponentType = () => {
                 
                 <div className="gap-2 flex flex-row">
                     <Link href={"/about"}>
-                        <button className=" rounded bg-slate-700 p-2">Our Story</button>
+                        <button className=" rounded bg-slate-700 p-2">About us</button>
                     </Link>
                     <a target="_blank" href="https://git.cs.vt.edu/dmath010/supersonicai" rel="noopener noreferrer">
                         <button className=" rounded bg-slate-700 p-2">View the Source Code</button>
