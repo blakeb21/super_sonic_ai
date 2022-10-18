@@ -32,7 +32,7 @@ const Home: NextPage = () => {
         </article>
         <article>
           <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
-            <h2 className="text-yellow-400 text-center">Phase 1: Actor-Critic Implementation</h2>
+            <h2 className="text-yellow-400 text-center">Phase 2: Actor-Critic Implementation</h2>
             <p className="text-center">The second step in our project was to create an Actor-Critic implementation. The Actor-Critic model is a form of reinforcement learning that seperates the value calculation from the policy decisions.</p>
             <Link href={'/actor_critic'}>
               <button className="rounded bg-yellow-400 text-black mx-auto p-2">Learn More!</button>
