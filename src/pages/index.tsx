@@ -39,6 +39,15 @@ const Home: NextPage = () => {
             </Link>
           </div>
         </article>
+        <article>
+          <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
+            <h2 className="text-yellow-400 text-center">Phase 3: Deep-Q Implementation</h2>
+            <p className="text-center">The third step in our project was to create a Deep-Q learning model. Deep-Q learning attempts to utilized neural networks to approximate a Q-value function in a given state. </p>
+            <Link href={'/deep_q'}>
+              <button className="rounded bg-yellow-400 text-black mx-auto p-2">Learn More!</button>
+            </Link>
+          </div>
+        </article>
       </main>
     </>
   );
