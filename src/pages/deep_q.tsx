@@ -3,15 +3,10 @@ import Head from "next/head";
 import Header from "../components/header";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import Image from "next/future/image";
-import deepQVideo from "../../public/deepQ.mp4";
-
 
 const DeepQ: NextPage = () => {
 
     const code = `# Implementation Coming Soon`
-
-    
 
   return (
     <>
