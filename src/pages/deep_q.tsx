@@ -27,10 +27,9 @@ const DeepQ: NextPage = () => {
         </article>
         <article>
             <div className="container mx-auto flex flex-col text-center p-6 md:px-8 lg:px-16">
-            <video autoPlay muted loop className="max-h-96">         
-                <source src="/deepQ.mp4" type="video/mp4"/>       
-            </video>
-                {/* <Image alt="Video of our DeepQ agent running the Green Hill Zone level." src={deepQVideo} width={128} height={128}/> */}
+                <video autoPlay muted loop className="max-h-96">         
+                    <source src="/deepQ.mp4" type="video/mp4"/>       
+                </video>
             </div>
         </article>
         <article>
