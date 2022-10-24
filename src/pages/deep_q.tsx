@@ -11,8 +11,8 @@ const DeepQ: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Actor-Critic Implementation</title>
-        <meta name="description" content="A page detailing the Actor-Critic implementation with code and demo." />
+        <title>DeepQ Implementation</title>
+        <meta name="description" content="A page detailing the DeepQ implementation with code and demo." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-h-screen">
