@@ -6,8 +6,7 @@ import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 const DeepQ: NextPage = () => {
 
-    const DeepModel = `
-##---------------Sources-------------------------##
+    const DeepModel = `##---------------Sources-------------------------##
 # DeepQ Learning with PyTorch: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
 # DeepQ for OpenAI Atari environments https://github.com/deepanshut041/Reinforcement-Learning 
 ##------------------------------------------------##
@@ -50,8 +49,7 @@ class DQN(nn.Module):
     def feature_size(self):
         return self.features(autograd.Variable(torch.zeros(1, *self.input_shape))).view(1, -1).size(1)`
 
-    const DeepAgent = `
-##---------------Sources-------------------------##
+    const DeepAgent = `##---------------Sources-------------------------##
 # DeepQ Learning with PyTorch: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
 # DeepQ Image Processing for GymRetro:  https://github.com/deepanshut041/Reinforcement-Learning 
 ##------------------------------------------------##
@@ -204,8 +202,7 @@ class DeepQ(AgentBase):
     def name(self) -> str:
         return "DeepQ"`
 
-    const DeepTraining = `
-##---------------Sources-------------------------##
+    const DeepTraining = `##---------------Sources-------------------------##
 # DeepQ Learning with PyTorch: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
 # DeepQ Image Processing for GymRetro:  https://github.com/deepanshut041/Reinforcement-Learning 
 # Helper Functions for Gym Retro: https://github.com/moversti/sonicNEAT 

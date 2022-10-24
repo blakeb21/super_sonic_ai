@@ -127,8 +127,7 @@ class NeatAgent(AgentBase):
   def to_string(self) -> str:
     return self.name()`
   
-  const NeatTraining = `
-##---------------Sources-------------------------##
+  const NeatTraining = `##---------------Sources-------------------------##
 # Neat NN Implementation: https://gitlab.com/lucasrthompson/Sonic-Bot-In-OpenAI-and-NEAT
 # DeepQ Image Processing for GymRetro:  https://github.com/deepanshut041/Reinforcement-Learning 
 # Helper Functions for Gym Retro: https://github.com/moversti/sonicNEAT 
