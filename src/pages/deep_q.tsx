@@ -11,16 +11,23 @@ const DeepQ: NextPage = () => {
 # DeepQ for OpenAI Atari environments https://github.com/deepanshut041/Reinforcement-Learning 
 ##------------------------------------------------##
 
+import os
+import sys
 import torch
 import torch.nn as nn
 import torch.autograd as autograd 
 import torch.nn.functional as F
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_dir = os.path.abspath(script_dir + "/../..")
+
 class DQN(nn.Module):
-    def __init__(self, input_shape, num_actions):
+    def __init__(self, input_shape, num_actions, seed=0):
         super(DQN, self).__init__()
         self.input_shape = input_shape
         self.num_actions = num_actions
+        self.seed = seed
+        
         
         # TODO DM Changed kernel and stride to better fit our standard 28 x 40 size. 
         # Currently setup to take Atari 84x84 images
@@ -63,24 +70,23 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 import random
-sys.path.append(os.path.abspath('..'))
-script_dir = os.path.dirname(__file__)
-sys.path.append(script_dir + '/../agents')
-sys.path.append(script_dir + '/../interface')
-sys.path.append(script_dir + '/../models')
 
-from learning.deep_q_buffer import ReplayBuffer
-from learning import train_deep_q
-from agents.agent_base import * 
-from interface.checkpoint import *
-from models.deep_q_model import DQN
-from learning.train_deep_q import stack_frames
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_dir = os.path.abspath(script_dir + "/../..")
+
+sys.path.append(os.path.abspath(project_dir + '/source/agents'))
+sys.path.append(os.path.abspath(project_dir + '/source/interface'))
+sys.path.append(os.path.abspath(project_dir + '/source/learning'))
+sys.path.append(os.path.abspath(project_dir + '/source/models'))
+
+from agent_base import * 
+from deep_q_buffer import *
+from train_deep_q import *
+from deep_q_model import DQN
 from datetime import datetime, date
-from interface.action_space import *
+from action_space import *
 
-
-
-# DeepQ Neural Network. 
+# DeepQ Neural Network.
 class DeepQ(AgentBase):
 
     # TODO Empty Constructor
@@ -101,31 +107,40 @@ class DeepQ(AgentBase):
             replay_after (int): After which replay to be started
             model(Model): Pytorch Model
         """
-        input_shape = (4, 84, 84) #stacked frames x w x h
+        input_shape = (4, 84, 84) #stacked frames x channels x w x h
         self.action_size = 7 #len(possible_actions)
         self.seed = 0 #random.seed(seed)
         self.buffer_size = 100000
         self.batch_size = 32
         self.gamma = 0.99
-        self.lr = 0.0001
+        self.lr = 0.00001
         self.update_every = 100
         self.replay_after = 10000
-        if model is None:
-            self.DQN = DQN
-        else:
-            self.DQN=torch.load(model)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        
+        self.DQN = DQN
         self.tau = 1e-3
-        self.device = 'cpu'
+
         
         # Q-Network
-        self.policy_net = self.DQN(input_shape, self.action_size).to(self.device)
-        self.target_net = self.DQN(input_shape, self.action_size).to(self.device)
+    
+        self.policy_net = self.DQN(input_shape, self.action_size, self.seed).to(self.device)
+        if model is not None:
+            os.chdir(script_dir)
+            os.chdir('..')
+            os.chdir('..')
+            root = os.getcwd()
+            checkpoint = torch.load(model, map_location=self.device)
+
+            self.policy_net.load_state_dict(checkpoint['model_state_dict'])
+
+            #self.policy_net.load_state_dict(torch.load(os.path.join(root, model), map_location=self.device), strict=False)
+        self.target_net = self.DQN(input_shape, self.action_size, self.seed).to(self.device)
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=self.lr)
         
         # Replay memory
         self.memory = ReplayBuffer(self.buffer_size, self.batch_size, self.seed, self.device)
         self.t_step = 0
-
 
     def step(self, state, action, reward, next_state, done):
         # Save experience in replay memory
@@ -185,22 +200,37 @@ class DeepQ(AgentBase):
     def load(self, filename):
         None
 
-
-
-    def save(self, epoch):
-        date = str(datetime.now().date()) 
-        torch.save(self.DQN, f'results/checkpoints/training/{self.name()}_{date}_e{str(epoch)}' )
-
-    def train(self, env, n_episodes, reward, render, ckpt, save_rate):
-        train_deep_q.train(self, env, n_episodes, reward, render, ckpt, save_rate)
-
-    def decide(self, ob, info, counter) -> list:
-        None
+    def save(self, filename, epoch):
+        torch.save({
+            'epoch': epoch,
+            'model_state_dict': self.policy_net.state_dict(),
+            }, filename)
+        
+    def train(self, env, n_episodes, reward_system, render, ckpt, save_rate):
+        DeepQTrainer.train(self, env, n_episodes, reward_system, render, ckpt, save_rate)
     
+    def decide(self, ob, info) -> list:
+        # Quick Fix
+        if hasattr(self, '__prev_state'):
+            self.__prev_state = DeepQTrainer.stack_frames(self.__prev_state, ob, False)
+        else:
+            self.__prev_state = DeepQTrainer.stack_frames(None, ob, True) 
+        
+        move = self.act(self.__prev_state)
+
+        return ActionSpace.move(move)
 
     # Returns name of agent as a string
     def name(self) -> str:
-        return "DeepQ"`
+        return "DeepQ"
+
+    # Moves data from current memory to 'device' memory
+    # ex: agent.move_to(torch.cuda()) will move neural network data to GPU memory. 
+    # If sucessfull, all operations on this NN will be executed on that device (CPU or GPU).
+    # Internal fields will be moved. The object itself does not need to be reassigned like tensors do.
+    def to(self, device) -> None:
+        self.policy_net = self.policy_net.to(device)
+        self.target_net = self.target_net.to(device)`
 
     const DeepTraining = `##---------------Sources-------------------------##
 # DeepQ Learning with PyTorch: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
@@ -208,6 +238,7 @@ class DeepQ(AgentBase):
 # Helper Functions for Gym Retro: https://github.com/moversti/sonicNEAT 
 ##------------------------------------------------##
 
+from fileinput import filename
 import time
 import retro
 import random
@@ -216,126 +247,122 @@ import numpy as np
 from collections import deque
 import math
 import os
-
 import sys
-script_dir = os.path.dirname(__file__)
-sys.path.append('../../')
-sys.path.append(script_dir + '/../agents')
-sys.path.append(script_dir + '/../interface')
+from datetime import datetime, date
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_dir = os.path.abspath(script_dir + "/../..")
+
+sys.path.append(os.path.abspath(project_dir + '/source/agents'))
+sys.path.append(os.path.abspath(project_dir + '/source/interface'))
+sys.path.append(os.path.abspath(project_dir + '/source/learning'))
+sys.path.append(os.path.abspath(project_dir + '/source/models'))
+sys.path.append(os.path.abspath(project_dir + '/source/vision'))
 
 from all_agents import * 
+from checkpoint import *
 from deep_q_agent import *
-from models.deep_q_model import DQN
-from vision.image_processing import preprocess_frame, stack_frame
-from interface.action_space import *
-from vision.greyImageViewer import GreyImageViewer
-from vision.controllerViewer import ControllerViewer
+from deep_q_model import DQN
+from image_processing import preprocess_frame, stack_frame
+from action_space import *
+from greyImageViewer import GreyImageViewer
+from controllerViewer import ControllerViewer
+from reward_system import *
+
+class DeepQTrainer:
+    def stack_frames(frames, state, is_new=False):
+        """Stacks frames for broader input of environment."""
+
+        frame = preprocess_frame(state)
+        frames = stack_frame(frames, frame, is_new)
+        return frames
 
 
+    def train(agent, env, n_episodes=1000, reward_system=RewardSystem.Contest, render=False, ckpt=None, save_rate=10):
+        """
+        Params
+        ======
+            n_episodes (int): maximum number of training episodes
+        """
+        # if gpu is to be used
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print("Device: ", device)
 
-def stack_frames(frames, state, is_new=False):
-    """Stacks frames for broader input of environment."""
+        UPDATE_TARGET = 10000	# After which thershold replay to be started 
+        EPS_START = 0.99		# starting value of epsilon
+        EPS_END = 0.01			# Ending value of epsilon
+        EPS_DECAY = 100			# Rate by which epsilon to be decayed
 
-    frame = preprocess_frame(state)
-    frames = stack_frame(frames, frame, is_new)
-    return frames
+        # Initialize Agent
+        start_epoch = 0
+        scores = []
+        max_score = -9999999	# initialize to a very small number
+        scores_window = deque(maxlen=20)
 
+        # Initialize checkpoint
+        ckpt = Checkpoint(agent)
+        ckpt.make_dir() # Makes new directory if it does not exist
 
-def train(agent, env, n_episodes=1000, reward='contest', render=False, ckpt=None, save_rate=10):
-    """
-    Params
-    ======
-        n_episodes (int): maximum number of training episodes
-    """
-    # if gpu is to be used
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print("Device: ", device)
+        epsilon_by_epsiode = lambda frame_idx: EPS_END + (EPS_START - EPS_END) * math.exp(-1. * frame_idx /EPS_DECAY)
 
-    possible_actions = ActionSpace().BUTTONS
+        for i_episode in range(start_epoch + 1, n_episodes+1):
+            state = DeepQTrainer.stack_frames(None, env.reset(), True)
+            next_state, reward, done, info = env.step(ActionSpace.stand_still())	# make a passive move to initialize data
 
+            score = 0
+            eps = epsilon_by_epsiode(i_episode)
+            reward_system.init(info)
 
-    UPDATE_TARGET = 10000  # After which thershold replay to be started 
-    EPS_START = 0.99       # starting value of epsilon
-    EPS_END = 0.01         # Ending value of epsilon
-    EPS_DECAY = 100         # Rate by which epsilon to be decayed
+            # Punish the agent for not moving forward
+            prev_state = {}
+            steps_stuck = 0
+            timestamp = 0
 
+            while timestamp < 5000:
+                action = agent.act(state, eps)
+                next_state, reward, done, info = env.step(ActionSpace.move(action))
+                reward = reward_system.calc_reward(info, ActionSpace.move(action))
 
-    # Initialize Agent
-    start_epoch = 0
-    scores = []
-    scores_window = deque(maxlen=20)
+                if render is True:
+                    env.render()
 
-    epsilon_by_epsiode = lambda frame_idx: EPS_END + (EPS_START - EPS_END) * math.exp(-1. * frame_idx /EPS_DECAY)
+                score += reward
 
-    for i_episode in range(start_epoch + 1, n_episodes+1):
-        state = stack_frames(None, env.reset(), True)
-        score = 0
-        eps = epsilon_by_epsiode(i_episode)
+                timestamp += 1
 
-        # Punish the agent for not moving forward
-        prev_state = {}
-        steps_stuck = 0
-        timestamp = 0
+                # Punish the agent for standing still for too long.
+                if (prev_state == info):
+                    steps_stuck += 1
+                else:
+                    steps_stuck = 0
+                prev_state = info
 
-        while timestamp < 10000:
-            action = agent.act(state, eps)
-            next_state, reward, done, info = env.step(possible_actions[action])
-            score += reward
+                if (steps_stuck > 20):
+                    reward -= 1
 
-            timestamp += 1
-
-            # Punish the agent for standing still for too long.
-            if (prev_state == info):
-                steps_stuck += 1
-            else:
-                steps_stuck = 0
-            prev_state = info
-    
-            if (steps_stuck > 20):
-                reward -= 1
+                next_state = DeepQTrainer.stack_frames(state, next_state, False)
+                agent.step(state, action, reward, next_state, done)
+                state = next_state
+                if done:
+                    break
             
-            next_state = stack_frames(state, next_state, False)
-            agent.step(state, action, reward, next_state, done)
-            state = next_state
-            if done:
-                break
-        scores_window.append(score)       # save most recent score
-        scores.append(score)              # save most recent score
-        print (i_episode)
-        if (i_episode % save_rate == 0):
-            agent.save(i_episode)
-    return scores
+            scores_window.append(score)		# save most recent score
+            scores.append(score)			# save most recent score
+            print ("epoch:", i_episode, "score:", score)
 
+        scores_window.append(score)		# save most recent score
+        scores.append(score)			# save most recent score
+        if score > max_score:
+            max_score = score
+        print ("epoch:", i_episode, "score:", score)
 
-# Untrained Agent
-# env.viewer = None
-# state = stack_frames(None, env.reset(), True) 
-# for j in range(10000):
-#     env.render(close=False)
-#     action = agent.act(state, eps=0.91)
-#     next_state, reward, done, _ = env.step(possible_actions[action])
-#     state = stack_frames(state, next_state, False)
-#     if done:
-#         env.reset()
-#         break 
-# env.render(close=True)
-
-# Trained Agent
-# train(50)
-# print (scores)
-
-# env.viewer = None
-# state = stack_frames(None, env.reset(), True) 
-# for j in range(10000):
-#     env.render(close=False)
-#     action = agent.act(state, eps=0.1)
-#     next_state, reward, done, _ = env.step(possible_actions[action])
-#     state = stack_frames(state, next_state, False)
-#     if done:
-#         env.reset()
-#         break 
-# env.render(close=True)`
+        if (i_episode % save_rate == 0 and max_score == score):
+            ckpt.epoch = i_episode
+            ckpt.score = score
+            fn = ckpt.generate_path()
+            agent.save(fn, i_episode)
+            print("Saving checkpoint to \'", fn, '\'', " New best reward found.", sep='')
+        return scores`
 
   return (
     <>
@@ -368,13 +395,13 @@ def train(agent, env, n_episodes=1000, reward='contest', render=False, ckpt=None
             <SyntaxHighlighter
               showLineNumbers
               style={vscDarkPlus}
-              languag="python">
+              language="python">
                 {DeepModel}
             </SyntaxHighlighter>
-            </div>
-            </article>
-            <article>
-            <div className="m-6 md:mx-8 lg:mx-16">
+          </div>
+        </article>
+        <article>
+          <div className="m-6 md:mx-8 lg:mx-16">
             <h3 className="text-yellow-400 pt-6">DeepQ Agent Class:</h3>
             <SyntaxHighlighter 
                 showLineNumbers
@@ -382,10 +409,10 @@ def train(agent, env, n_episodes=1000, reward='contest', render=False, ckpt=None
                 language="python">
                 {DeepAgent} 
             </SyntaxHighlighter>
-            </div>
-            </article>
-            <article>
-            <div className="m-6 md:mx-8 lg:mx-16">
+          </div>
+        </article>
+        <article>
+          <div className="m-6 md:mx-8 lg:mx-16">
             <h3 className="text-yellow-400 pt-6">DeepQ Traing Class:</h3>
             <SyntaxHighlighter 
                 showLineNumbers
