@@ -19,5 +19,4 @@ export default defineNextConfig({
     locales: ["en"],
     defaultLocale: "en",
   },
-  experimental: { images: { allowFutureImage: true } },
 });

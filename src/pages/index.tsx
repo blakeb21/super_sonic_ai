@@ -25,8 +25,8 @@ const Home: NextPage = () => {
           <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
             <h2 className="text-yellow-400 text-center">Phase 1: NEAT Implementation</h2>
             <p className="text-center">The first step in our project was to create a basic NEAT implementation. NEAT stands for NeuroEvolution of Augmenting Topologies, which is a form of evolutionary machine learning developed by researchers at MIT. The result is a fast but structured machine learning algorithm.</p>
-            <Link href={'/neat'}>
-              <button className="rounded bg-yellow-400 text-black mx-auto p-2">Learn More!</button>
+            <Link href={'/neat'} className="mx-auto mt-1">
+              <button className="rounded bg-yellow-400 text-black p-2">Learn More!</button>
             </Link>
           </div>
         </article>
@@ -34,8 +34,8 @@ const Home: NextPage = () => {
           <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
             <h2 className="text-yellow-400 text-center">Phase 2: Actor-Critic Implementation</h2>
             <p className="text-center">The second step in our project was to create an Actor-Critic implementation. The Actor-Critic model is a form of reinforcement learning that seperates the value calculation from the policy decisions.</p>
-            <Link href={'/actor_critic'}>
-              <button className="rounded bg-yellow-400 text-black mx-auto p-2">Learn More!</button>
+            <Link href={'/actor_critic'} className="mx-auto mt-1">
+              <button className="rounded bg-yellow-400 text-black p-2">Learn More!</button>
             </Link>
           </div>
         </article>
@@ -43,8 +43,8 @@ const Home: NextPage = () => {
           <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
             <h2 className="text-yellow-400 text-center">Phase 3: Deep-Q Implementation</h2>
             <p className="text-center">The third step in our project was to create a Deep-Q learning model. Deep-Q learning attempts to utilized neural networks to approximate a Q-value function in a given state. </p>
-            <Link href={'/deep_q'}>
-              <button className="rounded bg-yellow-400 text-black mx-auto p-2">Learn More!</button>
+            <Link href={'/deep_q'} className="mx-auto mt-1">
+              <button className="rounded bg-yellow-400 text-black p-2">Learn More!</button>
             </Link>
           </div>
         </article>
