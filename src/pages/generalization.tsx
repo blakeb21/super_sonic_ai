@@ -380,7 +380,7 @@ class DeepQTrainer:
         </article>
         <article>
             <div className="container mx-auto flex flex-col text-center p-6 md:px-8 lg:px-16">
-                <p className="text-center mb-4">This is Sonic's first attempt at Level 2 after generalization training:</p>
+                <p className="text-center mb-4">This is Sonics first attempt at Level 2 after generalization training:</p>
                 <video autoPlay muted loop className="max-h-96">         
                     <source src="/generalization.mp4" type="video/mp4"/>       
                 </video>
