@@ -383,7 +383,7 @@ class ActorCriticTrainer:
     <>
       <Head>
         <title>Actor-Critic Implementation</title>
-        <meta name="description" content="A page detailing the Actor-Critic implementation with code and demo." />
+        <meta name="description" content="What is the Actor-Critic model with our code and training outcomes." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-h-screen">

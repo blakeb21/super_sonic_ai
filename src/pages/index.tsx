@@ -48,6 +48,15 @@ const Home: NextPage = () => {
             </Link>
           </div>
         </article>
+        <article>
+          <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
+            <h2 className="text-yellow-400 text-center">Phase 4: Deep-Q Generalization</h2>
+            <p className="text-center">The fourth step in our project was to...</p>
+            <Link href={'/generalization'} className="mx-auto mt-1">
+              <button className="rounded bg-yellow-400 text-black p-2">Learn More!</button>
+            </Link>
+          </div>
+        </article>
       </main>
     </>
   );

@@ -368,7 +368,7 @@ class DeepQTrainer:
     <>
       <Head>
         <title>DeepQ Implementation</title>
-        <meta name="description" content="A page detailing the DeepQ implementation with code and demo." />
+        <meta name="description" content="What is DeepQ with our full code and outcome." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-h-screen">
