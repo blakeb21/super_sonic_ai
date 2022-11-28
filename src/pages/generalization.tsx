@@ -375,7 +375,6 @@ class DeepQTrainer:
             <h1 className="text-yellow-400 text-2xl m-2">DeepQ Generalization</h1>
             <p className="text-center mb-4">The fourth step in our project was to create a DeepQ generalization. Generalization is a further expansion on our <Link href="/deep_q" className="text-yellow-400 underline hover:text-yellow-600">DeepQ Implementation.</Link></p>
             <p className="text-center mb-4"></p>
-            <p className="text-center flex-wrap">Source: <a target="_blank" href="https://www.analyticsvidhya.com/blog/2019/04/introduction-deep-q-learning-python/" rel="noopener noreferrer" className="text-yellow-400 underline hover:text-yellow-600">Analytic Vidhya</a></p>
           </div>
         </article>
         <article>
