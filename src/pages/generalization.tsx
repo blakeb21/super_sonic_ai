@@ -374,15 +374,23 @@ class DeepQTrainer:
           <div className="container mx-auto flex flex-col text-center p-6 md:px-8 lg:px-16">
             <h1 className="text-yellow-400 text-2xl m-2">DeepQ Generalization</h1>
             <p className="text-center mb-4">The fourth step in our project was to create a DeepQ generalization. Generalization is a further expansion on our <Link href="/deep_q" className="text-yellow-400 underline hover:text-yellow-600">DeepQ Implementation.</Link></p>
-            <p className="text-center mb-4"></p>
+            <p className="text-center mb-4">Generalization refers to a model&apos;s ability to adapt to novel data not seen during training. In reinforcement learning, this occurs when an agent utilizes a policy developed outside of the deployment environment. For our case, Sonic is trained on several levels, and the agent attempt to use a policy to conquer an unseen level. While this can decrease overall performance across environments, it is vital to developing viable agents for use in real world applications.</p>
           </div>
         </article>
         <article>
             <div className="container mx-auto flex flex-col text-center p-6 md:px-8 lg:px-16">
-                <p className="text-center mb-4">This is Sonics first attempt at Level 2 after generalization training:</p>
+                <h1 className="text-yellow-400 text-2xl m-2">Generalized Runs</h1>
+                <p className="text-center mb-4">This is Sonic&apos;s first attempt at Level 2 after generalization training:</p>
                 <video autoPlay muted loop className="max-h-96">         
-                    <source src="/generalization.mp4" type="video/mp4"/>       
+                    <source src="/generalization_level2.mp4" type="video/mp4"/>       
                 </video>
+                <p className="text-center mb-4">As you can see, Sonic has a lot of problems when faced with a loop and has not figured out how to dodge enemies he hasn&apos;t seen before.</p>
+
+                <p className="text-center mb-4">This is Sonic&apos;s first attempt at Level 4 after generalization training:</p>
+                <video autoPlay muted loop className="max-h-96">         
+                    <source src="/generalization_level4.mp4" type="video/mp4"/>       
+                </video>
+                <p className="text-center mb-4">As you can see, Sonic has a lot of problems with both the lava and the moving platforms, both of which he has not seen before.</p>
             </div>
         </article>
         <article>
