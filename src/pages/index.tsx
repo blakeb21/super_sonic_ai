@@ -91,6 +91,11 @@ const Home: NextPage = () => {
               </div>
             </div>
         </article>
+        <article className="container text-end">
+          <button className="rounded bg-yellow-400 text-black p-2  mb-8 mt-8">
+            <Link href={"/initialization"}>Phase 1: Initialization -&gt;</Link>
+          </button>
+        </article>
       </main>
     </>
   );
