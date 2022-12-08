@@ -294,8 +294,8 @@ if __name__ == "__main__":
                 {NeatFeedForward}
             </SyntaxHighlighter>
             </div>
-            </article>
-            <article>
+          </article>
+          <article>
             <div className="m-6 md:mx-8 lg:mx-16">
             <h3 className="text-yellow-400 pt-6">NEAT Agent Class:</h3>
             <SyntaxHighlighter 

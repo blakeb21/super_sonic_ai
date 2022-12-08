@@ -393,6 +393,11 @@ class DeepQTrainer:
                 <p className="text-center mb-4">As you can see, Sonic has a lot of problems with both the lava and the moving platforms, both of which he has not seen before.</p>
             </div>
         </article>
+        <article className="container text-end">
+          <button className="rounded bg-yellow-400 text-black p-2  mb-8 mt-8">
+            <Link href={"/generalization"}>Phase 4: Semantic Segmentation -&gt;</Link>
+          </button>
+        </article>
         <article>
           <h2 className="text-center text-yellow-400 p-6 md:px-8 lg:px-16">Our Code:</h2>
           <div className="m-6 md:mx-8 lg:mx-16">

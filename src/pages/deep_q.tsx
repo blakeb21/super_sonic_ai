@@ -391,7 +391,7 @@ class DeepQTrainer:
         </article>
         <article className="container text-end">
           <button className="rounded bg-yellow-400 text-black p-2  mb-8 mt-8">
-            <Link href={"/replay_agent"}>Model Development -&gt;</Link>
+            <Link href={"/model_development"}>Phase 3: Model Development -&gt;</Link>
           </button>
         </article>
         <article>
