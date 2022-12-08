@@ -40,43 +40,6 @@ const Home: NextPage = () => {
                 </video>
             </div>
         </article>
-        <article className="container text-end">
-          <button className="rounded bg-yellow-400 text-black p-2  mb-8 mt-8">
-            <Link href={"/deepq_tuning"}>DeepQ Tuning -&gt;</Link>
-          </button>
-        </article>
-        <article>
-          <h2 className="text-center text-yellow-400 p-6 md:px-8 lg:px-16">Our Code:</h2>
-          <div className="m-6 md:mx-8 lg:mx-16">
-            <p></p>
-            <SyntaxHighlighter
-              showLineNumbers
-              style={vscDarkPlus}
-              languag="python">
-                {}
-            </SyntaxHighlighter>
-            </div>
-          </article>
-          <article>
-            <div className="m-6 md:mx-8 lg:mx-16">
-            <SyntaxHighlighter 
-                showLineNumbers
-                style={vscDarkPlus}
-                language="python">
-                {} 
-            </SyntaxHighlighter>
-            </div>
-            </article>
-            <article>
-            <div className="m-6 md:mx-8 lg:mx-16">
-            <SyntaxHighlighter 
-                showLineNumbers
-                style={vscDarkPlus}
-                language="python">
-                {} 
-            </SyntaxHighlighter>
-          </div>
-        </article>
       </main>
     </>
   );
