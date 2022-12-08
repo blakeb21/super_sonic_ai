@@ -395,7 +395,7 @@ class DeepQTrainer:
         </article>
         <article className="container text-end">
           <button className="rounded bg-yellow-400 text-black p-2  mb-8 mt-8">
-            <Link href={"/generalization"}>Phase 4: Semantic Segmentation -&gt;</Link>
+            <Link href={"/semantic_segmentation"}>Phase 4: Semantic Segmentation -&gt;</Link>
           </button>
         </article>
         <article>
