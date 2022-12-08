@@ -3,6 +3,7 @@ import Head from "next/head";
 import Header from "../components/header";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import Link from "next/link";
 
 const DeepQ: NextPage = () => {
 
@@ -387,6 +388,11 @@ class DeepQTrainer:
                     <source src="/deepQ.mp4" type="video/mp4"/>       
                 </video>
             </div>
+        </article>
+        <article className="container text-end">
+          <button className="rounded bg-yellow-400 text-black p-2  mb-8 mt-8">
+            <Link href={"/replay_agent"}>Model Development -&gt;</Link>
+          </button>
         </article>
         <article>
           <h2 className="text-center text-yellow-400 p-6 md:px-8 lg:px-16">Our Code:</h2>

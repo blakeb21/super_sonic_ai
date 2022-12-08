@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-// import { trpc } from "../utils/trpc";
 import Link from "next/link";
 import Header from "../components/header";
 
@@ -155,6 +154,11 @@ if __name__ == "__main__":
             </SyntaxHighlighter>
           </div>
         </article>
+        <article className="container text-end">
+          <button className="rounded bg-yellow-400 text-black p-2  mb-8 mt-8">
+            <Link href={"/model_experimentation"}>Phase 2: Model Experimentation -&gt;</Link>
+          </button>
+        </article>
         <article>
           <div className="container mx-auto flex flex-col p-6 md:px-8 lg:px-16">
             <h2 className="text-yellow-400 text-center m-1">Random Agent Code</h2>
@@ -166,11 +170,6 @@ if __name__ == "__main__":
                 {randomAgent}
             </SyntaxHighlighter>
           </div>
-        </article>
-        <article className="container text-end">
-          <button className="rounded bg-yellow-400 text-black p-2  mb-8 mt-8">
-            <Link href={"/"}>Phase 2: Model Experimentation -&gt;</Link>
-          </button>
         </article>
       </main>
     </>
