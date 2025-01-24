@@ -16,7 +16,7 @@
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
     "@types/react-syntax-highlighter": "^15.5.5",
-    "next": "^13.0.3",
+    "next": "^15.1.6",
     "posthog-js": "^1.165.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
