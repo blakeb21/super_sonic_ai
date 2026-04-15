@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-// import { trpc } from "../utils/trpc";
 import Link from "next/link";
 import Header from "../components/header";
 import Image from "next/image";
