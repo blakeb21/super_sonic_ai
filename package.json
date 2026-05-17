@@ -9,28 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/react-syntax-highlighter": "^15.5.5",
-    "next": "^15.3.9",
-    "posthog-js": "^1.165.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "next": "^15.5.18",
+    "posthog-js": "^1.373.5",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-syntax-highlighter": "^15.6.6",
-    "zod": "^3.18.0"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
-    "@typescript-eslint/eslint-plugin": "^8.58.2",
-    "@typescript-eslint/parser": "^8.58.2",
-    "autoprefixer": "^10.4.10",
+    "@typescript-eslint/eslint-plugin": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.3",
+    "autoprefixer": "^10.5.0",
     "eslint": "^8.57.1",
-    "eslint-config-next": "^15.3.9",
-    "postcss": "^8.4.16",
+    "eslint-config-next": "^15.5.18",
+    "postcss": "^8.5.14",
     "tailwindcss": "^3.4.19",
-    "typescript": "^5.0.0"
+    "typescript": "^5.9.3"
   },
   "ct3aMetadata": {
     "initVersion": "5.8.3"
